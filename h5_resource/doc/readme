@@ -1,0 +1,166 @@
+CREATE TABLE `t_social_h5_dictionary` (
+                                       `ID` int(11) NOT NULL,
+                                       `DIC_NAME` varchar(50) DEFAULT NULL,
+                                       `DIC_DESC` varchar(100) DEFAULT NULL,
+                                       `B_USE` char(2) NOT NULL,
+                                       `DIC_TYPE` char(2) NOT NULL,
+                                       `DIC_KEYWORD` varchar(1000) DEFAULT NULL,
+                                       `ORDER_KEY` char(10) DEFAULT NULL,
+                                       PRIMARY KEY (`ID`)
+                                     ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+                                     CREATE TABLE `t_social_h5_resource` (
+                                       `Id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增长主键',
+                                       `stage_id` int(11) DEFAULT NULL COMMENT '学段ID',
+                                       `subject_id` int(11) DEFAULT NULL COMMENT '学科ID',
+                                       `category_id` int(11) DEFAULT NULL COMMENT '所属分类ID',
+                                       `name` varchar(500) DEFAULT NULL COMMENT '资源名称',
+                                       `thumb_id` varchar(50) DEFAULT NULL COMMENT '缩略图ID+扩展名',
+                                       `zip_file_id` varchar(50) DEFAULT NULL COMMENT '压缩文件ID+扩展名',
+                                       `zip_flag` int(11) DEFAULT NULL COMMENT '是否需要解压，默认1需要，0不需要',
+                                       `zip_status` int(11) DEFAULT NULL COMMENT '解压状态，默认0未解压，1已解压',
+                                       `url` varchar(500) DEFAULT NULL COMMENT '资源访问地址，http全路径',
+                                       `qr_code` varchar(500) DEFAULT NULL COMMENT '二维码文件ID+扩展名',
+                                       `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                       `update_ts` timestamp NULL DEFAULT NULL COMMENT '更新时间戳',
+                                       `stage_name` varchar(255) DEFAULT NULL,
+                                       `subject_name` varchar(255) DEFAULT NULL,
+                                       PRIMARY KEY (`Id`)
+                                     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+                                     CREATE TABLE `t_social_h5_resource_category` (
+                                       `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增长主键',
+                                       `stage_id` int(11) DEFAULT NULL COMMENT '学段id',
+                                       `subject_id` int(11) DEFAULT NULL COMMENT '学科id',
+                                       `name` varchar(50) DEFAULT NULL COMMENT '分类名称',
+                                       `sequence` int(11) DEFAULT NULL COMMENT '排序',
+                                       `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                       PRIMARY KEY (`id`)
+                                     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+                                     CREATE TABLE `t_social_h5_resource_record` (
+                                       `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增长主键',
+                                       `DATA_SOURCE` int(255) DEFAULT NULL,
+                                       `h5_resource_id` int(11) DEFAULT NULL COMMENT '资源ID',
+                                       `CLIENT_TYPE_ID` int(11) DEFAULT NULL COMMENT '终端类型，1PC，2移动',
+                                       `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                       `IP` varchar(25) DEFAULT NULL,
+                                       `REQ_URL` varchar(1000) DEFAULT NULL COMMENT '请求',
+                                       `REQ_TIME` datetime DEFAULT NULL COMMENT '访问资源时间',
+                                       `REQ_METHOD` varchar(20) DEFAULT NULL COMMENT 'GET/POST',
+                                       `BROWSER` varchar(255) DEFAULT NULL,
+                                       `ARGS_GET` varchar(4000) DEFAULT NULL,
+                                       `ARGS_POST` varchar(4000) DEFAULT NULL,
+                                       `COOKIE` varchar(4000) DEFAULT NULL,
+                                       `HTTP_STATUES` varchar(10) DEFAULT NULL,
+                                       PRIMARY KEY (`id`)
+                                     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+                                     CREATE TABLE `t_social_h5_resource_scheme` (
+                                       `h5_resource_id` int(11) NOT NULL COMMENT '资源ID，三个字段联合主键',
+                                       `scheme_id` int(11) NOT NULL COMMENT '版本ID，如人教版',
+                                       `volume_id` int(11) NOT NULL COMMENT '册ID，如三年级上',
+                                       PRIMARY KEY (`h5_resource_id`,`scheme_id`,`volume_id`),
+                                       UNIQUE KEY `a_unique` (`h5_resource_id`,`scheme_id`,`volume_id`)
+                                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+CREATE TABLE `t_social_h5_dictionary` (
+`ID`  int(11) NOT NULL ,
+`DIC_NAME`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`DIC_DESC`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`B_USE`  char(2) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`DIC_TYPE`  char(2) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`DIC_KEYWORD`  varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`ORDER_KEY`  char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+PRIMARY KEY (`ID`)
+)
+ENGINE=MyISAM
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+CHECKSUM=0
+ROW_FORMAT=DYNAMIC
+DELAY_KEY_WRITE=0
+;
+
+CREATE TABLE `t_social_h5_resource` (
+`Id`  int(11) NOT NULL AUTO_INCREMENT COMMENT '自增长主键' ,
+`stage_id`  int(11) NULL DEFAULT NULL COMMENT '学段ID' ,
+`subject_id`  int(11) NULL DEFAULT NULL COMMENT '学科ID' ,
+`category_id`  int(11) NULL DEFAULT NULL COMMENT '所属分类ID' ,
+`name`  varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '资源名称' ,
+`thumb_id`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '缩略图ID+扩展名' ,
+`zip_file_id`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '压缩文件ID+扩展名' ,
+`zip_flag`  int(11) NULL DEFAULT NULL COMMENT '是否需要解压，默认1需要，0不需要' ,
+`zip_status`  int(11) NULL DEFAULT NULL COMMENT '解压状态，默认0未解压，1已解压' ,
+`url`  varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '资源访问地址，http全路径' ,
+`qr_code`  varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '二维码文件ID+扩展名' ,
+`create_time`  timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
+`update_ts`  timestamp NULL DEFAULT NULL COMMENT '更新时间戳' ,
+`stage_name`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' ,
+`subject_name`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' ,
+PRIMARY KEY (`Id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1
+ROW_FORMAT=COMPACT
+;
+
+CREATE TABLE `t_social_h5_resource_category` (
+`id`  int(11) NOT NULL AUTO_INCREMENT COMMENT '自增长主键' ,
+`stage_id`  int(11) NULL DEFAULT NULL COMMENT '学段id' ,
+`subject_id`  int(11) NULL DEFAULT NULL COMMENT '学科id' ,
+`name`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分类名称' ,
+`sequence`  int(11) NULL DEFAULT NULL COMMENT '排序' ,
+`create_time`  timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1
+ROW_FORMAT=COMPACT
+;
+
+CREATE TABLE `t_social_h5_resource_record` (
+`id`  int(11) NOT NULL AUTO_INCREMENT COMMENT '自增长主键' ,
+`DATA_SOURCE`  int(255) NULL DEFAULT NULL ,
+`h5_resource_id`  int(11) NULL DEFAULT NULL COMMENT '资源ID' ,
+`CLIENT_TYPE_ID`  int(11) NULL DEFAULT NULL COMMENT '终端类型，1PC，2移动' ,
+`create_time`  datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间' ,
+`IP`  varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`REQ_URL`  varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求' ,
+`REQ_TIME`  datetime NULL DEFAULT NULL COMMENT '访问资源时间' ,
+`REQ_METHOD`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'GET/POST' ,
+`BROWSER`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`ARGS_GET`  varchar(4000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`ARGS_POST`  varchar(4000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`COOKIE`  varchar(4000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`HTTP_STATUES`  varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1
+ROW_FORMAT=COMPACT
+;
+
+CREATE TABLE `t_social_h5_resource_scheme` (
+`h5_resource_id`  int(11) NOT NULL COMMENT '资源ID，三个字段联合主键' ,
+`scheme_id`  int(11) NOT NULL DEFAULT 0 COMMENT '版本ID，如人教版' ,
+`volume_id`  int(11) NOT NULL DEFAULT 0 COMMENT '册ID，如三年级上' ,
+`section_id`  int(11) NOT NULL DEFAULT 0 ,
+`chapter_id`  int(11) NOT NULL DEFAULT 0 ,
+PRIMARY KEY (`h5_resource_id`, `scheme_id`, `volume_id`, `chapter_id`, `section_id`),
+UNIQUE INDEX `a_unique` (`h5_resource_id`, `scheme_id`, `volume_id`, `chapter_id`, `section_id`) USING BTREE
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+ROW_FORMAT=COMPACT
+;
+
+
+
